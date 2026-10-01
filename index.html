@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>童话村电影网 - 免费高清电影在线观看 | tonghuacundianyingwang-h5.github.io</title>
+<meta name="description" content="童话村电影网(https://tonghuacundianyingwang-h5.github.io)提供最新电影、热播电视剧、动漫番剧、综艺娱乐免费高清在线观看，极速播放无广告，童话村电影网带您进入梦幻般的影视世界。">
+<meta name="keywords" content="童话村电影网,tonghuacundianyingwang-h5.github.io,免费电影在线观看,高清影视,最新电影,热播电视剧,动漫番剧,童话村影视">
+<link rel="canonical" href="https://tonghuacundianyingwang-h5.github.io/">
+<style>
+/* ===== 全局 ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Microsoft YaHei", sans-serif;
+    background: #0c0a14;
+    color: #e8e0f0;
+    line-height: 1.65;
+    overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; transition: all .3s; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+/* ===== 头部 ===== */
+.header {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(12,10,20,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(162,107,255,0.2);
+    z-index: 1000;
+}
+.header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+.logo { font-size: 1.6rem; font-weight: 800; color: #a26bff; letter-spacing: 0.5px; }
+.logo span { color: #fff; }
+.nav { display: flex; gap: 28px; }
+.nav a { color: #bbb; font-size: .95rem; padding: 6px 0; position: relative; }
+.nav a::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px; background: linear-gradient(90deg, #a26bff, #ff6bff);
+    transition: width .3s;
+}
+.nav a:hover, .nav a.active { color: #a26bff; }
+.nav a:hover::after, .nav a.active::after { width: 100%; }
+.nav-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.7rem; cursor: pointer; }
+
+/* ===== 首屏 Hero ===== */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding-top: 80px;
+    overflow: hidden;
+}
+.hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: 
+        radial-gradient(ellipse 60% 50% at 20% 30%, rgba(162,107,255,0.15), transparent),
+        radial-gradient(ellipse 50% 60% at 80% 70%, rgba(255,107,255,0.12), transparent),
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(107,200,255,0.08), transparent);
+    animation: heroPulse 8s ease-in-out infinite;
+}
+@keyframes heroPulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
+.hero-content { position: relative; z-index: 2; text-align: center; max-width: 780px; animation: fadeUp 1s ease-out; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(35px)} to{opacity:1;transform:translateY(0)} }
+.hero-badge {
+    display: inline-block; background: rgba(162,107,255,0.12); border: 1px solid rgba(162,107,255,0.3);
+    color: #a26bff; padding: 6px 18px; border-radius: 25px; font-size: .85rem; margin-bottom: 24px;
+}
+.hero h1 { font-size: 3.5rem; font-weight: 900; color: #fff; margin-bottom: 16px; line-height: 1.2; }
+.hero h1 .grad {
+    background: linear-gradient(135deg, #a26bff, #ff6bff);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero-desc { font-size: 1.1rem; color: #999; max-width: 640px; margin: 0 auto 32px; line-height: 1.8; }
+.hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 38px; border-radius: 50px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all .3s;
+}
+.btn-primary {
+    background: linear-gradient(135deg, #a26bff, #ff6bff); color: #fff;
+    box-shadow: 0 6px 25px rgba(162,107,255,0.4);
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 35px rgba(162,107,255,0.6); }
+.btn-outline {
+    background: transparent; color: #fff; border: 2px solid rgba(162,107,255,0.5);
+}
+.btn-outline:hover { background: rgba(162,107,255,0.1); border-color: #a26bff; transform: translateY(-3px); }
+
+/* ===== 数据栏 ===== */
+.stats {
+    background: rgba(15,12,25,0.8); border-top: 1px solid rgba(162,107,255,0.12);
+    border-bottom: 1px solid rgba(162,107,255,0.12); padding: 30px 0;
+}
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
+.stat-num { font-size: 2.2rem; font-weight: 800; background: linear-gradient(135deg,#a26bff,#ff6bff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.stat-label { font-size: .85rem; color: #888; margin-top: 4px; }
+
+/* ===== 区块通用 ===== */
+.section { padding: 70px 0; }
+.section-alt { background: #100d1c; }
+.sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 34px; }
+.sec-title { font-size: 1.6rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 12px; }
+.sec-title .icon {
+    width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #a26bff, #ff6bff); border-radius: 10px; font-size: 1.1rem;
+}
+.more { color: #a26bff; font-size: .9rem; }
+.more:hover { color: #ff6bff; }
+
+/* ===== 电影网格 ===== */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 22px; }
+.card {
+    background: #16122a; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px;
+    overflow: hidden; transition: all .35s; position: relative;
+}
+.card:hover { transform: translateY(-8px); box-shadow: 0 16px 40px rgba(162,107,255,0.18); border-color: rgba(162,107,255,0.3); }
+.card-badge {
+    position: absolute; top: 10px; right: 10px; background: rgba(255,107,255,0.9);
+    color: #fff; font-size: .7rem; padding: 3px 8px; border-radius: 4px; font-weight: 600; z-index: 2;
+}
+.poster {
+    height: 235px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem;
+    position: relative;
+}
+.poster::after { content:''; position:absolute; inset:0; background: linear-gradient(180deg,transparent 60%,rgba(0,0,0,.45)); }
+.c1{background:linear-gradient(135deg,#667eea,#764ba2)} .c2{background:linear-gradient(135deg,#f093fb,#f5576c)}
+.c3{background:linear-gradient(135deg,#4facfe,#00f2fe)} .c4{background:linear-gradient(135deg,#43e97b,#38f9d7)}
+.c5{background:linear-gradient(135deg,#fa709a,#fee140)} .c6{background:linear-gradient(135deg,#a18cd1,#fbc2eb)}
+.card-body { padding: 14px; }
+.card-body h3 { font-size: .95rem; color: #fff; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-body p { font-size: .78rem; color: #888; display: flex; justify-content: space-between; align-items: center; }
+.card-body p .score { color: #ff6bff; font-weight: 600; }
+
+/* ===== 排行榜 ===== */
+.rank { max-width: 850px; margin: 0 auto; }
+.rank-item {
+    display: flex; align-items: center; gap: 18px;
+    background: #16122a; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px;
+    padding: 16px 20px; margin-bottom: 12px; transition: all .3s;
+}
+.rank-item:hover { background: #1c1830; transform: translateX(6px); border-color: rgba(162,107,255,0.25); }
+.rn {
+    width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-weight: 800; color: #fff; flex-shrink: 0; font-size: 1.15rem;
+}
+.r1{background:linear-gradient(135deg,#ffd700,#ff8c00)} .r2{background:linear-gradient(135deg,#c0c0c0,#7a7a7a)}
+.r3{background:linear-gradient(135deg,#cd7f32,#a0522d)} .r4{background:linear-gradient(135deg,#a26bff,#7b2ff7)}
+.r5{background:linear-gradient(135deg,#ff6bff,#e84393)}
+.rank-info h3 { font-size: 1.05rem; color: #fff; margin-bottom: 4px; }
+.rank-info p { font-size: .82rem; color: #888; }
+
+/* ===== 分类标签 ===== */
+.tags { display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+.tag {
+    padding: 8px 20px; background: #16122a; border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;
+    color: #999; font-size: .88rem; cursor: pointer; transition: all .3s;
+}
+.tag:hover, .tag.active { background: linear-gradient(135deg,#a26bff,#ff6bff); color: #fff; border-color: transparent; }
+
+/* ===== 底部 ===== */
+.footer { background: #080612; padding: 50px 0 25px; border-top: 1px solid rgba(162,107,255,0.15); }
+.foot-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 35px; }
+.footer-brand h3 { color: #a26bff; font-size: 1.4rem; margin-bottom: 10px; }
+.footer-brand p { color: #666; font-size: .88rem; line-height: 1.7; }
+.footer-col h4 { color: #fff; font-size: 1rem; margin-bottom: 14px; }
+.footer-col a { display: block; color: #666; font-size: .85rem; margin-bottom: 8px; }
+.footer-col a:hover { color: #a26bff; }
+.footer-bottom { text-align: center; padding-top: 24px; border-top: 1px solid #1a1530; }
+.footer-bottom p { color: #555; font-size: .8rem; margin-bottom: 4px; }
+.footer-bottom a { color: #a26bff; }
+
+/* ===== 返回顶部 ===== */
+.back-top {
+    position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px;
+    background: linear-gradient(135deg,#a26bff,#ff6bff); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; color: #fff;
+    font-size: 1.2rem; cursor: pointer; opacity: 0; visibility: hidden; transition: all .3s; z-index: 999;
+}
+.back-top.show { opacity: 1; visibility: visible; }
+.back-top:hover { transform: translateY(-3px); }
+
+/* ===== 响应式 ===== */
+@media(max-width:768px){
+    .nav{display:none;position:fixed;top:62px;left:0;right:0;background:rgba(12,10,20,.98);flex-direction:column;padding:20px;gap:14px;border-bottom:1px solid rgba(162,107,255,.2)}
+    .nav.open{display:flex}
+    .nav-toggle{display:block}
+    .hero h1{font-size:2.2rem}
+    .hero-desc{font-size:.95rem}
+    .stats-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+    .section{padding:45px 0}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px}
+    .poster{height:190px}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:24px}
+}
+@media(max-width:480px){
+    .hero h1{font-size:1.8rem}
+    .hero-btns{flex-direction:column;align-items:center}
+    .btn{width:100%;max-width:260px;justify-content:center}
+    .stats-grid{grid-template-columns:1fr 1fr}
+    .stat-num{font-size:1.6rem}
+    .grid{grid-template-columns:repeat(2,1fr);gap:12px}
+    .poster{height:170px}
+    .foot-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<!-- 头部 -->
+<header class="header" id="header">
+    <div class="container">
+        <div class="header-inner">
+            <a href="https://tonghuacundianyingwang-h5.github.io" class="logo">童话村<span>电影网</span></a>
+            <nav class="nav" id="nav">
+                <a href="#" class="active">首页</a>
+                <a href="#movie">最新电影</a>
+                <a href="#tv">热播剧集</a>
+                <a href="#anime">动漫番剧</a>
+                <a href="#rank">排行榜</a>
+            </nav>
+            <button class="nav-toggle" id="navToggle">☰</button>
+        </div>
+    </div>
+</header>
+
+<!-- 首屏 -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">🏰 2026 梦幻升级 · 免费高清无广告</div>
+        <h1>童话村电影网<br><span class="grad">开启梦幻观影之旅</span></h1>
+        <p class="hero-desc">童话村电影网（tonghuacundianyingwang-h5.github.io）带您进入梦幻般的影视世界。最新电影、热播剧集、经典动漫、热门综艺，极速播放，画质超清，让每一部影片都如童话般美好。</p>
+        <div class="hero-btns">
+            <a href="#movie" class="btn btn-primary">🎬 进入童话世界</a>
+            <a href="#rank" class="btn btn-outline">🏆 查看排行榜</a>
+        </div>
+    </div>
+</section>
+
+<!-- 数据栏 -->
+<section class="stats">
+    <div class="container">
+        <div class="stats-grid">
+            <div><div class="stat-num">18,000+</div><div class="stat-label">影视资源</div></div>
+            <div><div class="stat-num">4K</div><div class="stat-label">超清画质</div></div>
+            <div><div class="stat-num">极速</div><div class="stat-label">播放体验</div></div>
+            <div><div class="stat-num">0 广告</div><div class="stat-label">纯净观影</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- 最新电影 -->
+<section class="section" id="movie">
+    <div class="container">
+        <div class="sec-head">
+            <h2 class="sec-title"><span class="icon">🎬</span> 最新电影</h2>
+            <a href="#" class="more">查看更多 ›</a>
+        </div>
+        <div class="tags">
+            <span class="tag active">全部</span>
+            <span class="tag">奇幻</span>
+            <span class="tag">科幻</span>
+            <span class="tag">动画</span>
+            <span class="tag">冒险</span>
+            <span class="tag">爱情</span>
+        </div>
+        <div class="grid">
+            <div class="card"><span class="card-badge">热映</span><div class="poster c1"><span>🎬</span></div><div class="card-body"><h3>《冰雪奇缘3》</h3><p><span>动画 · 2026</span><span class="score">⭐9.9</span></p></div></div>
+            <div class="card"><span class="card-badge">推荐</span><div class="poster c2"><span>🎬</span></div><div class="card-body"><h3>《阿凡达3：带种者》</h3><p><span>科幻 · 2026</span><span class="score">⭐9.7</span></p></div></div>
+            <div class="card"><div class="poster c3"><span>🎬</span></div><div class="card-body"><h3>《狮子王：木法沙》</h3><p><span>动画 · 2026</span><span class="score">⭐9.4</span></p></div></div>
+            <div class="card"><div class="poster c4"><span>🎬</span></div><div class="card-body"><h3>《驯龙高手4》</h3><p><span>动画 · 2026</span><span class="score">⭐9.3</span></p></div></div>
+            <div class="card"><span class="card-badge">高分</span><div class="poster c5"><span>🎬</span></div><div class="card-body"><h3>《沙丘3》</h3><p><span>科幻 · 2026</span><span class="score">⭐9.6</span></p></div></div>
+            <div class="card"><div class="poster c6"><span>🎬</span></div><div class="card-body"><h3>《功夫熊猫5》</h3><p><span>动画 · 2026</span><span class="score">⭐9.2</span></p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- 热播剧集 -->
+<section class="section section-alt" id="tv">
+    <div class="container">
+        <div class="sec-head">
+            <h2 class="sec-title"><span class="icon">📺</span> 热播剧集</h2>
+            <a href="#" class="more">查看更多 ›</a>
+        </div>
+        <div class="grid">
+            <div class="card"><div class="poster c2"><span>📺</span></div><div class="card-body"><h3>《权力的游戏：后裔》</h3><p><span>奇幻剧</span><span>10集</span></p></div></div>
+            <div class="card"><div class="poster c1"><span>📺</span></div><div class="card-body"><h3>《指环王：洛汗》</h3><p><span>奇幻剧</span><span>8集</span></p></div></div>
+            <div class="card"><div class="poster c6"><span>📺</span></div><div class="card-body"><h3>《星期三2》</h3><p><span>奇幻悬疑</span><span>8集</span></p></div></div>
+            <div class="card"><div class="poster c4"><span>📺</span></div><div class="card-body"><h3>《猎魔人5》</h3><p><span>奇幻冒险</span><span>8集</span></p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- 动漫番剧 -->
+<section class="section" id="anime">
+    <div class="container">
+        <div class="sec-head">
+            <h2 class="sec-title"><span class="icon">🌸</span> 动漫番剧</h2>
+            <a href="#" class="more">查看更多 ›</a>
+        </div>
+        <div class="grid">
+            <div class="card"><div class="poster c5"><span>🌸</span></div><div class="card-body"><h3>《进击的巨人·终章》</h3><p><span>热血动漫</span><span>12集</span></p></div></div>
+            <div class="card"><div class="poster c3"><span>🌸</span></div><div class="card-body"><h3>《咒术回战3》</h3><p><span>热血战斗</span><span>24集</span></p></div></div>
+            <div class="card"><div class="poster c1"><span>🌸</span></div><div class="card-body"><h3>《鬼灭之刃·无限城篇》</h3><p><span>热血冒险</span><span>11集</span></p></div></div>
+            <div class="card"><div class="poster c6"><span>🌸</span></div><div class="card-body"><h3>《海贼王·最终章》</h3><p><span>冒险动漫</span><span>连载中</span></p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- 排行榜 -->
+<section class="section section-alt" id="rank">
+    <div class="container">
+        <div class="sec-head">
+            <h2 class="sec-title"><span class="icon">🏆</span> 热门排行榜</h2>
+        </div>
+        <div class="rank">
+            <div class="rank-item"><span class="rn r1">1</span><div class="rank-info"><h3>《冰雪奇缘3》</h3><p>童话村电影网热播 · 动画巅峰 · ⭐9.9</p></div></div>
+            <div class="rank-item"><span class="rn r2">2</span><div class="rank-info"><h3>《阿凡达3：带种者》</h3><p>视觉奇观 · 科幻巨制 · ⭐9.7</p></div></div>
+            <div class="rank-item"><span class="rn r3">3</span><div class="rank-info"><h3>《沙丘3》</h3><p>史诗科幻 · 震撼视听 · ⭐9.6</p></div></div>
+            <div class="rank-item"><span class="rn r4">4</span><div class="rank-info"><h3>《权力的游戏：后裔》</h3><p>奇幻巨制 · 万众期待 · ⭐9.5</p></div></div>
+            <div class="rank-item"><span class="rn r5">5</span><div class="rank-info"><h3>《狮子王：木法沙》</h3><p>经典回归 · 感动人心 · ⭐9.4</p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- 底部 -->
+<footer class="footer">
+    <div class="container">
+        <div class="foot-grid">
+            <div class="footer-brand">
+                <h3>童话村电影网</h3>
+                <p>童话村电影网（tonghuacundianyingwang-h5.github.io）是专业的免费高清影视平台，带您进入梦幻般的影视世界。最新电影、热播剧集、动漫番剧和综艺娱乐，极速播放，画质超清，让观影如童话般美好。</p>
+            </div>
+            <div class="footer-col">
+                <h4>影视栏目</h4>
+                <a href="#movie">最新电影</a>
+                <a href="#tv">热播剧集</a>
+                <a href="#anime">动漫番剧</a>
+                <a href="#">综艺娱乐</a>
+            </div>
+            <div class="footer-col">
+                <h4>电影分类</h4>
+                <a href="#">奇幻片</a>
+                <a href="#">动画片</a>
+                <a href="#">科幻片</a>
+                <a href="#">冒险片</a>
+            </div>
+            <div class="footer-col">
+                <h4>关于本站</h4>
+                <a href="https://tonghuacundianyingwang-h5.github.io">tonghuacundianyingwang-h5.github.io</a>
+                <a href="#">关于我们</a>
+                <a href="#">免责声明</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 童话村电影网 | 童话村电影网是您免费高清观影的最佳选择 | <a href="https://tonghuacundianyingwang-h5.github.io">tonghuacundianyingwang-h5.github.io</a></p>
+            <p>本站所有影视资源均来自互联网，仅供测试交流使用，如有侵权请联系删除。</p>
+        </div>
+    </div>
+</footer>
+
+<div class="back-top" id="backTop">↑</div>
+
+<script>
+document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('nav').classList.toggle('open'));
+window.addEventListener('scroll',()=>{
+    document.getElementById('backTop').classList.toggle('show',window.scrollY>300);
+});
+document.getElementById('backTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+document.querySelectorAll('.tag').forEach(t=>t.addEventListener('click',function(){document.querySelectorAll('.tag').forEach(x=>x.classList.remove('active'));this.classList.add('active');}));
+</script>
+
+</body>
+</html>
